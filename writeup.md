@@ -6,6 +6,8 @@
    
 **Advanced Lane Finding Project**
 ---
+My result with (video)[https://youtu.be/IGK2Hxb-p24]:
+<img src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/alf.gif" height="303" width="550">
 
 The goals / steps of this project are the following:
 
@@ -18,15 +20,46 @@ The goals / steps of this project are the following:
 * Warp the detected lane boundaries back onto the original image.
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
+
+
 [//]: # (Image References)
 
-[image1]: ./examples/undistort_output.png "Undistorted"
-[image2]: ./test_images/test1.jpg "Road Transformed"
-[image3]: ./examples/binary_combo_example.jpg "Binary Example"
-[image4]: ./examples/warped_straight_lines.jpg "Warp Example"
-[image5]: ./examples/color_fit_lines.jpg "Fit Visual"
-[image6]: ./examples/example_output.jpg "Output"
-[video1]: ./project_video.mp4 "Video"
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_corners_1.png">
+
+
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_corners_2.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_corners_3.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_corners_4.png">
+
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_undist_1.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_undist_2.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_undist_3.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_undist_4.png">
+
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/undist_1.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/undist_2.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/undist_3.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/undist_4.png">
+
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/color_gradient_thresholds_org_1.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/color_gradient_thresholds_org_combine.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/color_gradient_thresholds_org.png">
+
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3_M.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3_Minv.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3_undistorted.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3_warped.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/bird_eye_warped_binary.png">
+
+
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/fillPolywindow1.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/fillPolywindow2.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/histogram_bird_eye_warped_binary.png">
+
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/unwarped_back_original.png">
+<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/warped_green_surface.png">
+
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
 
