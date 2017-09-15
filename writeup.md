@@ -21,7 +21,7 @@ The goals / steps of this project are the following:
 * Warp the detected lane boundaries back onto the original image.
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
-### Here I will consider the [rubric](https://review.udacity.com/#!/rubrics/571/view) points individually, and describe how I addressed each point in my implementation.
+Here I will consider the [rubric](https://review.udacity.com/#!/rubrics/571/view) points individually, and describe how I addressed each point in my implementation.
 
 ---
 
@@ -70,7 +70,7 @@ I used a combination of color and gradient thresholds to generate a binary image
 <img width="750" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/color_gradient_thresholds_org.png">
 <img width="750" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/color_gradient_thresholds_org_1.png">
 
-<img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/color_gradient_thresholds_org_combine.png">
+<img width="650" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/color_gradient_thresholds_org_combine.png">
 
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
