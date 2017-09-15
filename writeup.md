@@ -58,7 +58,7 @@ From the original image, I can use different color and gradient thresholds such 
 <img width="750" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/color_gradient_thresholds_org.png">
 <img width="750" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/color_gradient_thresholds_org_1.png">
 
-I have played with many combinations and I found the best combination that works for me as below.
+I have played with many combinations and found the best combination that works for me as below.
 ```python
 combined_binary[(saturation_HSV_binary==1) | (sobelx_binary==1) | (sobely_binary==1) & (value_HSV_binary==1) | (lightness_binary==1)]=1
 ```
@@ -68,9 +68,7 @@ combined_binary[(saturation_HSV_binary==1) | (sobelx_binary==1) | (sobely_binary
 
 #### 3. Describe and identify how to performe a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes methods `get_perspective_transform()` and `bird_eye_perspective()` in [cell 3](https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/Advanced%20Lane%20Finding.ipynb).
-
-The `get_perspective_transform()` method takes as inputs an image (`img`), source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform includes methods `get_perspective_transform()` and `bird_eye_perspective()` in [cell 3](https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/Advanced%20Lane%20Finding.ipynb). The `get_perspective_transform()` method takes as inputs an image (`img`), source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
 ```python
 src = np.float32(
@@ -94,33 +92,39 @@ This resulted in the following source and destination points:
 | 1127, 720     | 960, 720      |
 | 695, 460      | 960, 0        |
 
-The `bird_eye_perspective()` method also takes the image, src, and dst. This method first undistorts the image using `undistorted_correction()` method, then it uses the output to put to `get_perspective_transform()` method. The outputs are `M`, `Minv`, `warp`, and `undist`. 
-
-<img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3_warped.png">
-
-<!-- I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image. -->
+The `bird_eye_perspective()` method also takes the image, src, and dst. This method first undistorts the image using `undistorted_correction()` method, then it uses the output to put to `get_perspective_transform()` method. The outputs are `M`, `Minv`, `warped` (bird-eye view image), and `undist`. 
 
 <img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3.png">
+
+<img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3_warped.png">
+<!-- I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image. -->
 
 <img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/bird_eye_warped_binary.png">
 
 #### 4. Describe how to identify lane-line pixels and fit their positions with a polynomial.
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+The `find_lane_lines()` method identifies lane-line pixels and fit their positions with a polynomial, as shown in [cell 77 of the code](https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/Advanced%20Lane%20Finding.ipynb). This method takes the input as the combined binary from the output of the `apply_binary()` method. Then, the leftx and rightx are identified by finding the peaks of two halves in the `histogram` output. 
+
+<img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/histogram_bird_eye_warped_binary.png">
+
+I also use the global variable `detected_line` to either compute lane-line pixels and fit their positions with `np.polyfit()` or to skip the sliding windows when `left_fit` and `right_fit` are known. Then, the image is colored in left and right line pixels with sliding windows. Finally, it is unwarped back to the original image. 
 
 <img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/fillPolywindow1.png">
+
 <img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/fillPolywindow2.png">
-<img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/histogram_bird_eye_warped_binary.png">
+
+<img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/unwarped_back_original.png">
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+I did this in [cell 81 of the code](https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/Advanced%20Lane%20Finding.ipynb).
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
 I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
 
-<img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/unwarped_back_original.png">
+
+
 <img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/warped_green_surface.png">
 
 ---
