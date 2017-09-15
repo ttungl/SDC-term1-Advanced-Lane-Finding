@@ -46,11 +46,13 @@ The goals / steps of this project are the following:
 <img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/color_gradient_thresholds_org_combine.png">
 <img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/color_gradient_thresholds_org.png">
 
-<img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3_M.png">
+<!-- <img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3_M.png">
 <img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3_Minv.png">
 <img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3_undistorted.png">
 <img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3_warped.png">
 <img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3.png">
+ -->
+
 <img width="960" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/bird_eye_warped_binary.png">
 
 
