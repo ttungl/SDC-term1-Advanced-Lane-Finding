@@ -6,7 +6,8 @@
    
 **Advanced Lane Finding Project**
 ---
-My result with (video)[https://youtu.be/IGK2Hxb-p24]:
+My result [video](https://youtu.be/IGK2Hxb-p24).
+
 <img src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/alf.gif" height="303" width="550">
 
 The goals / steps of this project are the following:
