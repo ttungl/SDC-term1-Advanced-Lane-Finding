@@ -115,15 +115,14 @@ I also use the global variable `detected_line` to either compute lane-line pixel
 
 <img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/unwarped_back_original.png">
 
-#### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in [cell 81 of the code](https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/Advanced%20Lane%20Finding.ipynb).
+#### 5. Describe how to calculate the radius of curvature of the lane and the position of the vehicle with respect to center.
+
+I did this in [cell 81 of the code](https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/Advanced%20Lane%20Finding.ipynb) via the `get_curvature()`, `get_center()`, and `draw_lines()` methods. In `get_curvature()` method, it converts the x and y dimensions from pixels space to meters. It then computes the `left_curverad` and `right_curverad` based on [the radius of curvature calculations](https://www.intmath.com/applications-differentiation/8-radius-curvature.php). In `get_center()` method, it computes the center of the lane based on the `left_fit` and `right_fit`. 
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
-
-
+I implemented this from lines 12-14 of [cell 83 of the code](https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/Advanced%20Lane%20Finding.ipynb), in `pipeline_process()` method. This unwarps the warped image with a flip of `src` and `dst` to convert back to the lane. Here is an example of my result on a test image:
 
 <img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/warped_green_surface.png">
 
@@ -140,4 +139,10 @@ This is my [video result](https://youtu.be/IGK2Hxb-p24).
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+The problem that I have faced and the solution to solve them are as follows.
+
+**[Green surface is distorted](https://www.youtube.com/watch?v=t17li4ZZ78Q)**: This took me a while to figure out the way to fix it. It turns out that I need to use both the sobel gradient `x` and `y` to detect the pixels on both `x` and `y`. I also play around the different combinations of the color thresholded binaries, and tuning the threshold parameters to make the warped image become more clear, and thereby, the green surface becomes perfect as demonstrated in the video.
+
+**Improvements** My pipeline works perfectly in the project video, but it still fails to recognize the road with two different colors (brightness and shadowness) on the same lane in the challenge video. One possible improvement is the adjustments of the thresholds and the combinations of the binaries to make it more robust on the challenge videos.
+
+
