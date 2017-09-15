@@ -133,6 +133,7 @@ I implemented this from lines 12-14 of [cell 83 of the code](https://github.com/
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
 This is my [video result](https://youtu.be/IGK2Hxb-p24).
+<img src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/alf.gif" height="303" width="550">
 
 ---
 ### Discussion
