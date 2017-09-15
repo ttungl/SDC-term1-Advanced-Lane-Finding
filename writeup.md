@@ -31,51 +31,46 @@ Here I will consider the [rubric](https://review.udacity.com/#!/rubrics/571/view
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
-I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function (see in `undistorted_correction()` of [block 3](https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/Advanced%20Lane%20Finding.ipynb)).  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
+I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function (see in `undistorted_correction()` of [cell 3](https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/Advanced%20Lane%20Finding.ipynb)).  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 
 <img width="750" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_corners_1.png">
-
-<!-- <img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_corners_2.png">
-<img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_corners_3.png">
-<img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_corners_4.png"> -->
 
 Undistortion of an input image: 
 
 <img width="750" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_undist_1.png">
-
-<!-- <img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_undist_2.png">
-<img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_undist_3.png">
-<img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/chess_undist_4.png"> -->
 
 ### Pipeline (single images)
 
 #### 1. Provide an example of a distortion-corrected image.
 
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like these ones below:
-<!-- 
-<img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/undist_1.png">
-<img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/undist_2.png">
-<img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/undist_3.png">
-<img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/undist_4.png"> -->
 
 <img width="750" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/undist_5.png">
 
-First, I use the original image, object points, and image points arrays as the inputs/arguments of `undistorted_correction` method. I convert this image into grayscale using `cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)`. Then, I use `cv2.calibrateCamera()` to compute the camera calibration. The output of `cv2.calibrateCamera()` is used to feed into `cv2.undistort()` to convert the image to the undistorted images as illustrated above.
+First, I use the original image, object points, and image points arrays as the inputs/arguments of `undistorted_correction` method. I convert this image into grayscale using OpenCV library, `cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)`. Then, I use `cv2.calibrateCamera()` to compute the camera calibration. The output of `cv2.calibrateCamera()` is used to feed into `cv2.undistort()` to convert the image to the undistorted images as illustrated above.
 
+#### 2. Describe how and identify to use color transforms, gradients or other methods to create a thresholded binary image. Provide an example of a binary image result.
 
-#### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image. Provide an example of a binary image result.
+I used a combination of color and gradient thresholds to generate a binary image in `combined_gradient_thresholds()` function (see in [cell 3](https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/Advanced%20Lane%20Finding.ipynb)). Here's an example of my outputs for this step.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+From the original image, I can use different color and gradient thresholds such as sobelx, sobely, saturation of HLS (using `cv2.COLOR_RGB2HLS`), value of HSV, saturation of HSV (using `cv2.COLOR_RGB2HSV`), b of LAB (using `cv2.COLOR_RGB2Lab`). The `lightness_binary` is the combination of saturation and lightness dimensions in HLS (using `cv2.COLOR_RGB2HLS`). 
 
 <img width="750" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/color_gradient_thresholds_org.png">
 <img width="750" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/color_gradient_thresholds_org_1.png">
 
+I have played with many combinations and I found the best combination that works for me as below.
+```python
+combined_binary[(saturation_HSV_binary==1) | (sobelx_binary==1) | (sobely_binary==1) & (value_HSV_binary==1) | (lightness_binary==1)]=1
+```
+
 <img width="650" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/color_gradient_thresholds_org_combine.png">
 
 
-#### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
+#### 3. Describe and identify how to performe a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform includes methods `get_perspective_transform()` and `bird_eye_perspective()` in [cell 3](https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/Advanced%20Lane%20Finding.ipynb).
+
+The `get_perspective_transform()` method takes as inputs an image (`img`), source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
 ```python
 src = np.float32(
@@ -99,14 +94,17 @@ This resulted in the following source and destination points:
 | 1127, 720     | 960, 720      |
 | 695, 460      | 960, 0        |
 
-I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
+The `bird_eye_perspective()` method also takes the image, src, and dst. This method first undistorts the image using `undistorted_correction()` method, then it uses the output to put to `get_perspective_transform()` method. The outputs are `M`, `Minv`, `warp`, and `undist`. 
 
 <img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3_warped.png">
+
+<!-- I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image. -->
+
 <img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/img3.png">
 
 <img width="450" src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/output_images/bird_eye_warped_binary.png">
 
-#### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+#### 4. Describe how to identify lane-line pixels and fit their positions with a polynomial.
 
 Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
 
