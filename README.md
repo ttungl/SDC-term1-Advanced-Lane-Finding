@@ -145,5 +145,5 @@ The problem that I have faced and the solution to solve them are as follows.
 
 **[Green surface is distorted](https://www.youtube.com/watch?v=t17li4ZZ78Q)**: This took me a while to figure out the way to fix it. It turns out that I need to use both the sobel gradient `x` and `y` to detect the pixels on both `x` and `y`. I also play around the different combinations of the color thresholded binaries, and tuning the threshold parameters to make the warped image become more clear, and thereby, the green surface becomes perfect as demonstrated in the video.
 
-**Improvements** My pipeline works perfectly in the project video, but it still fails to recognize the road with two different colors (brightness and shadowness) on the same lane in the challenge video. One possible improvement is the adjustments of the thresholds and the combinations of the binaries to make it more robust on the challenge videos.
+**Improvements** My pipeline works perfectly in the project video, but it still fails to recognize the road with two different colors (brightness and shadowness) on the same lane in the challenge video. One possible improvement is the adjustment of the thresholds and the combinations of the binaries to make it more robust on the challenge videos.
 
